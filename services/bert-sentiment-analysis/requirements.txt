@@ -1,3 +1,4 @@
 mlfoundry
 transformers
 gradio
+torch
