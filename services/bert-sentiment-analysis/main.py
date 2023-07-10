@@ -4,7 +4,7 @@ import gradio as gr
 import mlfoundry
 
 from mlfoundry.integrations.transformers import HF_MODEL_PATH
-from transformers import TextClassificationPipeline
+from transformers import AutoConfig, AutoTokenizer, AutoModelForSequenceClassification, TextClassificationPipeline
 
 
 mlf_client = mlfoundry.get_client()
