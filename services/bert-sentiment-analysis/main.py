@@ -1,6 +1,7 @@
 
 import os
 import gradio as gr
+import tempfile
 import mlfoundry
 
 from mlfoundry.integrations.transformers import HF_MODEL_PATH
@@ -9,8 +10,10 @@ from transformers import AutoConfig, AutoTokenizer, AutoModelForSequenceClassifi
 
 mlf_client = mlfoundry.get_client()
 
-run = mlf_client.get_run_by_fqn(os.environ.get('RUN_FQN'))
-downloaded = run.download_artifact_deprecated(HF_MODEL_PATH)
+artifact_version = mlf_client.get_artifact_version_by_fqn(fqn=os.environ.get('ARTIFACT_VERSION_FQN'))
+# download the model to disk
+temp = tempfile.TemporaryDirectory()
+downloaded = artifact_version.download(path=temp.name)
 
 tokenizer = AutoTokenizer.from_pretrained(downloaded, use_fast=True)
 
