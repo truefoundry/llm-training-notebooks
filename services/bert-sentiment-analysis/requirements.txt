@@ -1,4 +1,0 @@
-mlfoundry
-transformers
-gradio
-torch
